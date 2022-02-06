@@ -1,0 +1,100 @@
+{
+  "project_info": {
+    "project_number": "488623952244",
+    "project_id": "dilkumbaram-ebd20",
+    "storage_bucket": "dilkumbaram-ebd20.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488623952244:android:5e83b0ddd87b820de71c21",
+        "android_client_info": {
+          "package_name": "com.example.dil_kumbaram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488623952244-fuoob3km6hra7as5phmq9031c7s5lcs9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dil_kumbaram",
+            "certificate_hash": "ed73601f89861d2e355e7a5ca3e1d90605189406"
+          }
+        },
+        {
+          "client_id": "488623952244-hgp5sbj7nk6pg8nvkrrag2vgkv932ojg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dil_kumbaram",
+            "certificate_hash": "30108e1276bb5736c5d4de53d3b041c712395fdf"
+          }
+        },
+        {
+          "client_id": "488623952244-e8me7vn14uum6ggb02kb33uoha6vhbn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO3IejTFLHmyFSIZFlznaPoWSKcj3lWVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488623952244-e8me7vn14uum6ggb02kb33uoha6vhbn5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488623952244:android:99b449a22d16fa90e71c21",
+        "android_client_info": {
+          "package_name": "com.kumbaram.dil_kumbaram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488623952244-hhfp50rj4rhh224o23bt25phj9cjagug.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kumbaram.dil_kumbaram",
+            "certificate_hash": "ed73601f89861d2e355e7a5ca3e1d90605189406"
+          }
+        },
+        {
+          "client_id": "488623952244-inrgmfetpjp1eh45ja5ak68s0a7gcojv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kumbaram.dil_kumbaram",
+            "certificate_hash": "30108e1276bb5736c5d4de53d3b041c712395fdf"
+          }
+        },
+        {
+          "client_id": "488623952244-e8me7vn14uum6ggb02kb33uoha6vhbn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDO3IejTFLHmyFSIZFlznaPoWSKcj3lWVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488623952244-e8me7vn14uum6ggb02kb33uoha6vhbn5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
