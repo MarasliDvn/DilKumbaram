@@ -66,99 +66,105 @@ class _LoginPageWidgetsState extends State<LoginPageWidgets> {
               padding: const EdgeInsets.all(16.0),
               child: Form(
                 key: widget._formKey,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
+                
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Material(
-                      elevation: 5,
-                      shadowColor: HexColor('#000000'),
-                      borderRadius: BorderRadius.circular(10),
-                      child: TextFormField(
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          //errorStyle: TextStyle(color: Colors.orange),
-                          fillColor: HexColor("#F8F8FC"),
-                          filled: true,
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: HexColor("#91919F")),
-                              borderRadius: BorderRadius.circular(10)),
-                          labelText: 'E-mail',
-                          //hintText: 'E-mail',
-                          labelStyle: TextStyle(color: HexColor("#91919F")),
-                          prefixIcon: Padding(
-                            padding: const EdgeInsets.all(8),
-                            child: Icon(
-                              Icons.email_rounded,
-                              color: HexColor("#6360FF"),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: HexColor("#6B48FF")),
+                    TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        //errorStyle: TextStyle(color: Colors.orange),
+                        fillColor: HexColor("#F8F8FC"),
+                        filled: true,
+                        errorBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10)),
+                        focusedErrorBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10)) ,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: HexColor("#91919F")),
+                            borderRadius: BorderRadius.circular(10)),
+                        labelText: 'E-mail',
+                        //hintText: 'E-mail',
+                        labelStyle: TextStyle(color: HexColor("#91919F")),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Icon(
+                            Icons.email_rounded,
+                            color: HexColor("#6360FF"),
                           ),
                         ),
-                        onSaved: (deger) {
-                          _email = deger!;
-                        },
-                        validator: (deger) {
-                          if (deger!.isEmpty) {
-                            return 'E-mail boş olamaz';
-                          } else if (!EmailValidator.validate(deger)) {
-                            return 'Geçerli mail giriniz';
-                          } else {
-                            return null;
-                          }
-                        },
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: HexColor("#6B48FF")),
+                        ),
                       ),
+                      onSaved: (deger) {
+                        _email = deger!;
+                      },
+                      validator: (deger) {
+                        if (deger!.isEmpty) {
+                          return 'E-mail boş olamaz';
+                        } else if (!EmailValidator.validate(deger)) {
+                          return 'Geçerli mail giriniz';
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
                     SizedBox(
                       height: 20.h,
                     ),
-                    Material(
-                      elevation: 5,
-                      shadowColor: HexColor('#000000'),
-                      borderRadius: BorderRadius.circular(10),
-                      child: TextFormField(
-                        //initialValue: 'emrealtunbilek@gmail.com',
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          fillColor: HexColor("#F8F8FC"),
-                          filled: true,
-                          //errorStyle: TextStyle(color: Colors.orange),
-                          enabledBorder: OutlineInputBorder(
-                              borderSide:
-                                  BorderSide(color: HexColor("#91919F")),
-                              borderRadius: BorderRadius.circular(10)),
-                          labelText: 'Şifre',
-                          //hintText: 'Şifre',
-                          labelStyle: TextStyle(color: HexColor("#91919F")),
-                          prefixIcon: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Icon(
-                                Icons.lock,
-                                color: HexColor("#6360FF"),
-                              )),
+                    TextFormField(
+                      //initialValue: 'emrealtunbilek@gmail.com',
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        fillColor: HexColor("#F8F8FC"),
+                        filled: true,
+                        //errorStyle: TextStyle(color: Colors.orange),
+                         errorBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10)),
+                        focusedErrorBorder: OutlineInputBorder(
+                            borderSide:
+                                const BorderSide(color: Colors.red),
+                            borderRadius: BorderRadius.circular(10)) ,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: HexColor("#91919F")),
+                            borderRadius: BorderRadius.circular(10)),
+                        labelText: 'Şifre',
+                        //hintText: 'Şifre',
+                        labelStyle: TextStyle(color: HexColor("#91919F")),
+                        prefixIcon: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Icon(
+                              Icons.lock,
+                              color: HexColor("#6360FF"),
+                            )),
 
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: HexColor("#6B48FF")),
-                          ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: HexColor("#6B48FF")),
                         ),
-                        obscureText: true,
-                        onSaved: (deger) {
-                          _password = deger!;
-                        },
-                        validator: (deger) {
-                          if (deger!.length < 6) {
-                            return 'Şifre ne az 6 karakter olmalı';
-                          } else {
-                            return null;
-                          }
-                        },
                       ),
+                      obscureText: true,
+                      onSaved: (deger) {
+                        _password = deger!;
+                      },
+                      validator: (deger) {
+                        if (deger!.length < 6) {
+                          return 'Şifre ne az 6 karakter olmalı';
+                        } else {
+                          return null;
+                        }
+                      },
                     ),
                     SizedBox(
                       height: 40.h,
@@ -194,7 +200,7 @@ class _LoginPageWidgetsState extends State<LoginPageWidgets> {
                           onPressed: () {
                             _signInWithGoogle(context);
                           },
-                          child: const AutoSizeText('Google İle Giriş Yap'),
+                          child: const AutoSizeText('Google ile Giriş Yap'),
                           style: widget.googleLogin,
                         ),
                       ),
@@ -287,7 +293,7 @@ Future<UserCredential?> _signInWithGoogle(BuildContext context) async {
   try {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
+    
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
         await googleUser?.authentication;

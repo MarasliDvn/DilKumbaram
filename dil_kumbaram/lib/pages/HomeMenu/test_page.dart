@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dil_kumbaram/pages/HomeMenu/testpage_details.dart';
-import 'package:dil_kumbaram/pages/premium.dart';
+import 'package:dil_kumbaram/pages/HomeMenu/test_start.dart';
+
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -47,8 +48,9 @@ class _TestPageState extends State<TestPage> {
 
   @override
   Widget build(BuildContext context) {
-    userIsPremium().then((String result) {});
+    //userIsPremium().then((String result) {});
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: widget.durum
           ? AppBar(
               leading: IconButton(
@@ -73,11 +75,20 @@ class _TestPageState extends State<TestPage> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-      body: SizedBox(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bg.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
             children: [
+               SizedBox(
+                height: 95.h,
+              ),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Testler',
@@ -103,18 +114,11 @@ class _TestPageState extends State<TestPage> {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: () {
-          userIsPremium().then((String result) {
-            if (result == 'Standart') {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const PremiumPage()));
-            } else {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => TestDetails(
-                        dil: langue,
-                        test: 'Cümle Testi',
-                      )));
-            }
-          });
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => TestStart(
+                    dil: langue,
+                    test: 'Cümle Testi',
+                  )));
         },
         child: Stack(
           alignment: Alignment.center,
@@ -149,18 +153,11 @@ class _TestPageState extends State<TestPage> {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: () {
-          userIsPremium().then((String result) {
-            if (result == 'Standart') {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const PremiumPage()));
-            } else {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => TestDetails(
-                        dil: langue,
-                        test: 'İzleme Testi',
-                      )));
-            }
-          });
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => TestStart(
+                    dil: langue,
+                    test: 'İzleme Testi',
+                  )));
         },
         child: Stack(
           alignment: Alignment.center,
@@ -195,18 +192,11 @@ class _TestPageState extends State<TestPage> {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: () {
-          userIsPremium().then((String result) {
-            if (result == 'Standart') {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const PremiumPage()));
-            } else {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => TestDetails(
-                        dil: langue,
-                        test: 'Dinleme Testi',
-                      )));
-            }
-          });
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => TestStart(
+                    dil: langue,
+                    test: 'Dinleme Testi',
+                  )));
         },
         child: Stack(
           alignment: Alignment.center,
@@ -241,18 +231,16 @@ class _TestPageState extends State<TestPage> {
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: InkWell(
         onTap: () {
-          userIsPremium().then((String result) {
-            if (result == 'Standart') {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const PremiumPage()));
-            } else {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => TestDetails(
-                        dil: langue,
-                        test: 'Kelime Testi',
-                      )));
-            }
-          });
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => TestStart(
+                    dil: langue,
+                    test: 'Kelime Testi',
+                  )));
+          //Navigator.of(context).push(MaterialPageRoute(
+          //    builder: (context) => TestDetails(
+          //          dil: langue,
+          //          test: 'Kelime Testi',
+          //        )));
         },
         child: Stack(
           alignment: Alignment.center,

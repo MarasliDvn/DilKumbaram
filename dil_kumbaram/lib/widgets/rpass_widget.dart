@@ -1,18 +1,15 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dil_kumbaram/pages/HomeMenu/home_page.dart';
-import 'package:dil_kumbaram/pages/select_langue.dart';
+
+
+
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+
 import 'package:hexcolor/hexcolor.dart';
 
-FirebaseAuth _auth = FirebaseAuth.instance;
-FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+
 
 class RpassWidgets extends StatefulWidget {
   const RpassWidgets({
@@ -32,7 +29,7 @@ class RpassWidgets extends StatefulWidget {
 }
 
 class _RpassWidgetsState extends State<RpassWidgets> {
-  String _email = '', _password = '';
+  String _email = '';
   Future resetPass() async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: _email);

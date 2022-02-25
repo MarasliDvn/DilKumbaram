@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -69,11 +70,17 @@ class _ProfilPageState extends State<ProfilPage> {
   @override
   Widget build(BuildContext context) {
     userIsPremium();
-    return Padding(
-      padding: const EdgeInsets.all(24.0),
-      child: SizedBox(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/bg.png"),
+          fit: BoxFit.cover,
+        ),
+      ),
+      height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
             SizedBox(
@@ -386,7 +393,7 @@ class _ProfilPageState extends State<ProfilPage> {
           style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16.sp),
         ),
         Text(
-          dakika,
+          dakika.isNotEmpty ? dakika : '-',
           style: TextStyle(fontSize: 16.sp),
         ),
       ],
@@ -411,7 +418,6 @@ class _PremiumState extends State<Premium> {
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () {
-
           Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const PremiumPage()))
               .then((value) {
@@ -465,5 +471,7 @@ class _PremiumState extends State<Premium> {
 }
 
 Future<void> _signOut() async {
+  final GoogleSignIn googleSignIn = GoogleSignIn();
   await FirebaseAuth.instance.signOut();
+  await googleSignIn.signOut();
 }

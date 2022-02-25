@@ -58,13 +58,13 @@ class _LessonPageState extends State<LessonPage> {
 
   @override
   void initState() {
-    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: widget.durum
           ? AppBar(
               leading: IconButton(
@@ -89,10 +89,17 @@ class _LessonPageState extends State<LessonPage> {
               backgroundColor: Colors.transparent,
               elevation: 0,
             ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: SizedBox(child: Lessons(usersStream: _usersStream)),
-      ),
+      body: Container(
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/bg.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Lessons(usersStream: _usersStream),
+          )),
     );
   }
 }
@@ -135,38 +142,49 @@ class Lessons extends StatelessWidget {
                     width: 150.w,
                     height: 150.h,
                   ),
+                  SizedBox(
+                    height: 40.h,
+                  ),
                   AutoSizeText(
-                    'Aktif dersiniz bulunmuyor :(',
+                    'Aktif dersiniz bulunmuyor.',
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     style:
                         TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    height: 10.h,
+                    height: 40.h,
                   ),
-                  AutoSizeText(
+                  Text(
                     'Geç olmadan ve keşke demeden harekete geçmenizi öneriyoruz.',
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     style: TextStyle(
-                        fontSize: 18.sp, fontWeight: FontWeight.normal),
+                        fontSize: 14.sp, fontWeight: FontWeight.normal),
                   ),
                   SizedBox(
-                    height: 10.h,
+                    height: 20.h,
                   ),
-                  AutoSizeText(
+                  Text(
                     'Dersler ve speaking hakkında bilgi almak için alttaki butondan şimdi iletişime geçebilirsin.',
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     style: TextStyle(
-                        fontSize: 18.sp, fontWeight: FontWeight.normal),
+                        fontSize: 14.sp, fontWeight: FontWeight.normal),
                   ),
                   SizedBox(
-                      width: MediaQuery.of(context).size.width.w * 0.8,
+                    height: 40.h,
+                  ),
+                  SizedBox(
+                      height: 50.h,
+                      width: 250.w,
                       child: ElevatedButton.icon(
-                          style:
-                              ElevatedButton.styleFrom(primary: Colors.green),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.green,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(111.0),
+                            ),
+                          ),
                           icon: const FaIcon(FontAwesomeIcons.whatsapp),
                           onPressed: () async {
                             launchWhatsApp();
@@ -179,37 +197,17 @@ class Lessons extends StatelessWidget {
         }
         return Column(
           children: [
+            SizedBox(
+              height: 65.h,
+            ),
             Align(
                 alignment: Alignment.centerLeft,
                 child: AutoSizeText(
-                  'Planlı Derslerim',
+                  'Planlanan Derslerim',
                   style:
                       TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
                 )),
-            SizedBox(
-              height: 50.h,
-            ),
-            AutoSizeText(
-              'Herhangi bir sorun yaşamanız durumunda bizimle iletişime geçebilirsiniz. Dersinizin planlamaya yansıması biraz zaman alabilir.',
-              textAlign: TextAlign.center,
-              maxLines: 6,
-              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.normal),
-            ),
-            SizedBox(
-                width: MediaQuery.of(context).size.width.w * 0.8,
-                child: ElevatedButton.icon(
-                    style: ElevatedButton.styleFrom(primary: Colors.green),
-                    icon: FaIcon(
-                      FontAwesomeIcons.whatsapp,
-                      size: 24.sp,
-                    ),
-                    onPressed: () async {
-                      launchWhatsApp();
-                    },
-                    label: Text(
-                      'İletişime Geç',
-                      style: TextStyle(fontSize: 20.sp),
-                    ))),
+            contact(context),
             Expanded(
               child: SizedBox(
                 height: MediaQuery.of(context).size.height.h * 0.8,
@@ -219,13 +217,13 @@ class Lessons extends StatelessWidget {
                   controller: listcontroller,
                   children:
                       snapshot.data!.docs.map((DocumentSnapshot document) {
-                    Map<String, dynamic> data =
-                        document.data()! as Map<String, dynamic>;
-                    DateTime tarih = DateFormat.yMEd('tr').parse(datenow);
-                    DateTime tarih2 =
-                        DateFormat.yMEd('tr').parse(data['Tarih']);
+                    Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+                    
+                    DateTime tarih = DateFormat.yMd('tr').parse(datenow);
+                    Timestamp stamp = data['Tarih'];
+                    DateTime tarih2 =stamp.toDate();
                     final difference = tarih2.difference(tarih).inDays;
-
+                    String formattedDate = DateFormat('dd.MM.yyyy E','tr').format(tarih2);
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
@@ -240,7 +238,7 @@ class Lessons extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  AutoSizeText(data['Tarih']),
+                                  AutoSizeText(formattedDate),
                                   AutoSizeText(data['Ders']),
                                 ],
                               ),
@@ -326,6 +324,47 @@ class Lessons extends StatelessWidget {
           ],
         );
       },
+    );
+  }
+
+  SizedBox contact(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 50.h,
+          ),
+          AutoSizeText(
+            'Herhangi bir sorun yaşamanız durumunda bizimle iletişime geçebilirsiniz. Dersinizin planlamaya yansıması biraz zaman alabilir.',
+            textAlign: TextAlign.center,
+            maxLines: 6,
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.normal),
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
+          SizedBox(
+              width: MediaQuery.of(context).size.width.w * 0.8,
+              child: ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.green,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(111.0),
+                    ),
+                  ),
+                  icon: FaIcon(
+                    FontAwesomeIcons.whatsapp,
+                    size: 18.sp,
+                  ),
+                  onPressed: () async {
+                    launchWhatsApp();
+                  },
+                  label: Text(
+                    'İletişime Geç',
+                    style: TextStyle(fontSize: 18.sp),
+                  ))),
+        ],
+      ),
     );
   }
 }

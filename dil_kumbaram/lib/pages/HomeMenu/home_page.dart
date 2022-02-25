@@ -11,7 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:intl/intl.dart';
+
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
@@ -82,8 +82,8 @@ class _AnaSayfaState extends State<AnaSayfa> {
     initializeDateFormatting('tr');
     CollectionReference users = _firebaseFirestore.collection('users');
     String imageAssets = "";
-    DateTime now = DateTime.now();
-    String formattedDate = DateFormat.yMMMd('tr').format(now);
+    
+  
 
     return SingleChildScrollView(
       child: Container(
@@ -220,8 +220,8 @@ class _AnaSayfaState extends State<AnaSayfa> {
               }
             },
             child: SizedBox(
-              height: MediaQuery.of(context).size.height.h,
-              width: MediaQuery.of(context).size.width.w,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               child: Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),

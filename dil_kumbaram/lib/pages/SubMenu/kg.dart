@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dil_kumbaram/models/kg_models.dart';
 
@@ -67,6 +66,7 @@ class _KendiniGelistirState extends State<KendiniGelistir> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Colors.transparent,
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
@@ -77,12 +77,18 @@ class _KendiniGelistirState extends State<KendiniGelistir> {
             Navigator.pop(context),
           },
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: HexColor('#f4f4f4'),
         elevation: 0,
       ),
-      body: SizedBox(
+      body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bg.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(
@@ -93,19 +99,25 @@ class _KendiniGelistirState extends State<KendiniGelistir> {
                       style: TextStyle(
                           fontSize: 32.sp, fontWeight: FontWeight.bold))),
               SizedBox(
-                height: 35.sp,
+                height: 35.h,
               ),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Popüler Desteler',
                       style: TextStyle(
                           fontSize: 24.sp, fontWeight: FontWeight.bold))),
+              const SizedBox(
+                height: 13,
+              ),
               populer(),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Text('Tüm Desteler',
                       style: TextStyle(
                           fontSize: 24.sp, fontWeight: FontWeight.bold))),
+              const SizedBox(
+                height: 13,
+              ),
               all(),
             ],
           ),
@@ -377,9 +389,9 @@ class _KendiniGelistirState extends State<KendiniGelistir> {
                                   child: Text(
                                     kategori.toString(),
                                     style: TextStyle(
-                                      overflow: TextOverflow.ellipsis,
+                                      
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 24.sp,
+                                      fontSize: 20.sp,
                                       color: hexColor2,
                                     ),
                                     maxLines: 2,

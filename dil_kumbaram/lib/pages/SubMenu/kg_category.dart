@@ -94,12 +94,18 @@ class _KgCategoryState extends State<KgCategory> {
          Navigator.pop(context),
         },
       ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: HexColor('#f4f4f4'),
         elevation: 0,
       ),
-      body: SizedBox(
+      body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
+         decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/bg.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Column(

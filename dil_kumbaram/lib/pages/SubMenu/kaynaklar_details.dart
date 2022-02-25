@@ -39,10 +39,16 @@ class _KaynaklarDetailsState extends State<KaynaklarDetails> {
             Navigator.pop(context),
           },
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: HexColor('#f4f4f4'),
         elevation: 0,
       ),
-      body: SizedBox(
+      body: Container(
+         decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/bg.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Padding(

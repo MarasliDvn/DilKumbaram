@@ -52,13 +52,16 @@ class _KgDetailsState extends State<KgDetails> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-       leading:  IconButton(
-        icon:  Icon(Icons.arrow_back_ios_new,color: HexColor("#5D5FEF"),),
-        onPressed: () => {
-         Navigator.pop(context),
-        },
-      ),
-        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: HexColor("#5D5FEF"),
+          ),
+          onPressed: () => {
+            Navigator.pop(context),
+          },
+        ),
+        backgroundColor: HexColor('#f4f4f4'),
         elevation: 0,
       ),
       body: SizedBox(
@@ -93,7 +96,13 @@ class _KgDetailsState extends State<KgDetails> {
                       item.slink.toString();
 
                   return Container(
-                    color: HexColor('#FFFFFF'),
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/bg.png"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    //color: HexColor('#FFFFFF'),
                     width: width,
                     child: Center(
                         child: Padding(
@@ -110,7 +119,7 @@ class _KgDetailsState extends State<KgDetails> {
                               back: flipcard(tanlami),
                             ),
                           ),
-                           SizedBox(
+                          SizedBox(
                             height: 150.h,
                           ),
                           Row(

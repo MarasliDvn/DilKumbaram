@@ -11,28 +11,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
+
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:video_player/video_player.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class TestDetails extends StatefulWidget {
+class TestDetailsError extends StatefulWidget {
   final String dil, test;
-  const TestDetails({Key? key, required this.dil, required this.test})
+  const TestDetailsError({Key? key, required this.dil, required this.test})
       : super(key: key);
 
   @override
-  _TestDetailsState createState() => _TestDetailsState();
+  _TestDetailsErrorState createState() => _TestDetailsErrorState();
 }
 
-class _TestDetailsState extends State<TestDetails> {
+class _TestDetailsErrorState extends State<TestDetailsError> {
   late Future<List<TestlerModel>> _testlerList;
   late int index;
-  bool gecebilir2 = true;
+
   int _listlenght = 0;
   List<String> dogruList = [];
   List<String> yanlisList = [];
   late PurchaserInfo purchaserInfo;
-  String user = '';
+
   AudioPlayer audioPlayer = AudioPlayer();
   late VideoPlayerController videoPlayerController;
   late ChewieController chewieController;
@@ -56,7 +57,7 @@ class _TestDetailsState extends State<TestDetails> {
   }
 
   Future<void> checkindexing() async {
-    List<String> clist = dogruList + yanlisList;
+    List<String> clist = yanlisList;
     List futurelist = await _testlerList;
     futureindex.clear();
     for (var i = 0; i < futurelist.length; i++) {
@@ -71,7 +72,7 @@ class _TestDetailsState extends State<TestDetails> {
           break;
         }
       }
-      if (!found) {
+      if (found) {
         output.add(int.parse(e));
       }
     }
@@ -153,31 +154,11 @@ class _TestDetailsState extends State<TestDetails> {
     purchaserInfo = await Purchases.getPurchaserInfo();
   }
 
-  Future<String> userIsPremium() async {
-    purchaserInfo = await Purchases.getPurchaserInfo();
-    if (purchaserInfo.entitlements.all["Premium"] != null &&
-        purchaserInfo.entitlements.all["Premium"]!.isActive) {
-      return 'Abone';
-    } else {
-      return 'Standart';
-    }
-  }
-
-  Future<String> userIsPremium2() async {
-    purchaserInfo = await Purchases.getPurchaserInfo();
-    if (purchaserInfo.entitlements.all["Premium"] != null &&
-        purchaserInfo.entitlements.all["Premium"]!.isActive) {
-      return user = 'Abone';
-    } else {
-      return user = 'Standart';
-    }
-  }
-
   @override
   void initState() {
     super.initState();
     initPlatformState();
-    userIsPremium2();
+
     if (widget.test == 'Kelime Testi') {
       _testlerList = TestlerApi.getKelimeTesti(widget.dil);
 
@@ -249,12 +230,12 @@ class _TestDetailsState extends State<TestDetails> {
         elevation: 0,
       ),
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/bg.png"),
-            fit: BoxFit.cover,
+         decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/bg.png"),
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: Padding(
@@ -287,7 +268,7 @@ class _TestDetailsState extends State<TestDetails> {
         if (snapshot.hasData) {
           if (snapshot.data!.isEmpty) {
             return AlertDialog(
-              content: const Text("En kısa zamanda yeni sorular eklenecektir."),
+              content: const Text("Yanlış bildiğiniz soru bulunmamaktadır."),
               actions: <Widget>[
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(primary: HexColor('#6B48FF')),
@@ -320,52 +301,23 @@ class _TestDetailsState extends State<TestDetails> {
                   looping: false,
                   allowFullScreen: false);
             }
-
-            debugPrint(user);
-            int sinir;
-            widget.test == 'Kelime Testi' ? sinir = 15 : sinir = 2;
-            user == 'Standart'
-                ? _listlenght = sinir
-                : _listlenght = _listTestler.length;
-            return _listlenght != (dogruList + yanlisList).toSet().length
+            _listlenght = _listTestler.length;
+            return yanlisList.toSet().isNotEmpty
                 ? testdetails(
                     context, _url, cevap, cevaplar, dogru, _listTestler)
-                : user == 'Standart'
-                    ? AlertDialog(
-                        content:
-                            const Text("Tüm uygulamaya sınırsız erişim için premium'a geçiniz."),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const PremiumPage())).then((value) {
-                                setState(() {
-                                  // refresh state
-                                });
-                              });
-                            },
-                            style: ElevatedButton.styleFrom(
-                                primary: HexColor('#6B48FF')),
-                            child: const Text('Bilgi al',
-                                style: TextStyle(color: Colors.white)),
-                          )
-                        ],
+                : AlertDialog(
+                    content:
+                        const Text('Tebrikler hatan kalmadı.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(primary: HexColor('#6B48FF')),
+                        child: const Text('Tamam',style: TextStyle(color: Colors.white),),
                       )
-                    : AlertDialog(
-                        content: const Text(
-                            'Yeni sorular en kısa zamanda eklenecek.'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Tamam.'),
-                          )
-                        ],
-                      );
+                    ],
+                  );
           }
         } else if (snapshot.hasError) {
           return const Center(
@@ -516,8 +468,6 @@ class _TestDetailsState extends State<TestDetails> {
                         onPressed: () async {
                           if (cevaplar[0][0] == dogru) {
                             await truelist();
-                          } else {
-                            await falselist();
                           }
                           Navigator.pop(context, 'Sırada ki soru');
 
@@ -604,9 +554,7 @@ class _TestDetailsState extends State<TestDetails> {
                         onPressed: () async {
                           if (cevaplar[1][0] == dogru) {
                             await truelist();
-                          } else {
-                            await falselist();
-                          }
+                          } 
                           Navigator.pop(context, 'Sırada ki soru');
 
                           nextrecursive(index);
@@ -693,9 +641,7 @@ class _TestDetailsState extends State<TestDetails> {
                         onPressed: () async {
                           if (cevaplar[2][0] == dogru) {
                             await truelist();
-                          } else {
-                            await falselist();
-                          }
+                          } 
                           Navigator.pop(context, 'Sırada ki soru');
 
                           nextrecursive(index);
@@ -757,15 +703,8 @@ class _TestDetailsState extends State<TestDetails> {
                   primary: Colors.blue, // <-- Button color
                   onPrimary: Colors.red, // <-- Splash color
                 ),
-                onPressed: () async {
-                  if (index == _listTestler.length - 1) {
-                    await checkindexing();
-                    setState(() {
-                      
-                    });
-                  } else {
-                    nextrecursive(index);
-                  }
+                onPressed: () {
+                  nextrecursive(index);
                 },
               ),
             ],
@@ -792,26 +731,32 @@ class _TestDetailsState extends State<TestDetails> {
   Future<void> truelist() async {
     var sharedPreferences = await SharedPreferences.getInstance();
     dogruList.add(index.toString());
+    yanlisList.remove(index.toString());
+
     if (widget.test == 'Kelime Testi') {
       sharedPreferences.setStringList("kelime", dogruList);
+       sharedPreferences.setStringList("kelime2", yanlisList);
     } else if (widget.test == 'Dinleme Testi') {
       sharedPreferences.setStringList("dinleme", dogruList);
+       sharedPreferences.setStringList("dinleme2", yanlisList);
     } else if (widget.test == 'İzleme Testi') {
       sharedPreferences.setStringList("izleme", dogruList);
+      sharedPreferences.setStringList("izleme2", yanlisList);
     } else if (widget.test == 'Cümle Testi') {
       sharedPreferences.setStringList("cümle", dogruList);
+      sharedPreferences.setStringList("cümle2", yanlisList);
     }
   }
 
   void backrecursive(int degercik) {
     bool gecebilir = true;
-    var clist = dogruList + yanlisList;
+    var clist = yanlisList;
     for (final list in clist) {
-      if ((degercik - 1).toString() == list || degercik == 0) {
-        gecebilir = false;
+      if ((degercik - 1).toString() == list ) {
+        gecebilir = true;
         break;
       } else {
-        gecebilir = true;
+        gecebilir = false;
       }
     }
     if (gecebilir) {
@@ -834,27 +779,20 @@ class _TestDetailsState extends State<TestDetails> {
   }
 
   Future<void> nextrecursive(int degercik) async {
-    String tur = "";
-    int sinir;
-    widget.test == 'Kelime Testi' ? sinir = 14 : sinir = 1;
-    userIsPremium().then((String result) {
-      if (result == 'Standart') {
-        tur = 'Standart';
-      } else {
-        tur = 'Abone';
-      }
-    });
+   
+    
+   
     bool gecebilir = true;
-    var clist = dogruList + yanlisList;
+    var clist =  yanlisList;
     for (final list in clist) {
-      if ((degercik + 1).toString() == list || degercik == _listlenght - 1) {
-        gecebilir = false;
+      if ((degercik + 1).toString() == list ) {
+        gecebilir = true;
         break;
       } else {
-        gecebilir = true;
+        gecebilir = false;
       }
     }
-    if (gecebilir && (degercik < sinir || user == 'Abone')) {
+    if (gecebilir ) {
       saveData(degercik + 1);
       setState(() {
         if (widget.test == 'Dinleme Testi') {
@@ -866,7 +804,7 @@ class _TestDetailsState extends State<TestDetails> {
           chewieController.pause();
         }
       });
-    } else if ((degercik < sinir || user == 'Abone')) {
+    } else  {
       if (degercik < _listlenght - 1) {
         nextrecursive(degercik + 1);
       } else {
@@ -874,14 +812,6 @@ class _TestDetailsState extends State<TestDetails> {
 
         setState(() {});
       }
-    } else {
-      Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PremiumPage()))
-          .then((value) {
-        setState(() {
-          // refresh state
-        });
-      });
-    }
+    } 
   }
 }

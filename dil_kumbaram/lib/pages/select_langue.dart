@@ -39,8 +39,7 @@ class _SelectLangueState extends State<SelectLangue> {
         .snapshots()
         .listen((DocumentSnapshot<Map<String, dynamic>> userData) {
       if (userData.data()!['Dil'] != "") {
-        if (userData.data()!['Rol'] == "Student" ||
-            userData.data()!['Rol'] == "Student+") {
+        if (userData.data()!['Rol'] == "Student" ) {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(

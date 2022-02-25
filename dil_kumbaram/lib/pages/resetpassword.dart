@@ -1,4 +1,4 @@
-import 'package:dil_kumbaram/widgets/loginpage_widget.dart';
+
 import 'package:dil_kumbaram/widgets/rpass_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';

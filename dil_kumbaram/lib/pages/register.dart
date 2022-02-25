@@ -29,6 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         leading:  IconButton(
@@ -43,7 +44,7 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: SingleChildScrollView(child: RegisterPageWidgets(formKey: _formKey, loginbutton: loginbutton, googleLogin: googleLogin)),
+      body: RegisterPageWidgets(formKey: _formKey, loginbutton: loginbutton, googleLogin: googleLogin),
     );
   }
 }

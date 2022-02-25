@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
 
 import 'package:searchfield/searchfield.dart';
 
@@ -64,24 +65,37 @@ class _LessonAddState extends State<LessonAdd> {
         backgroundColor: HexColor("#6B48FF"),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              students(),
-              SizedBox(
-                height: 10.h,
-              ),
-              InputDecorator(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                  contentPadding: EdgeInsets.all(10),
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/bg.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                students(),
+                SizedBox(
+                  height: 10.h,
                 ),
-                child: TextField(
+                TextField(
                   controller: timeinput, //editing controller of this TextField
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
+                      fillColor: HexColor("#F9F9F9"),
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: HexColor("#91919F")),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(11.0))),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(11),
+                        borderSide: BorderSide(color: HexColor("#91919F")),
+                      ),
+                      labelStyle: TextStyle(color: HexColor("#91919F")),
                       //icon: Icon(Icons.timer), //icon of text field
                       labelText: "Saat" //label text of field
                       ),
@@ -105,111 +119,123 @@ class _LessonAddState extends State<LessonAdd> {
                     timeinput.text = deger;
                   },
                 ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              InputDecorator(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                  contentPadding: EdgeInsets.all(10),
+                SizedBox(
+                  height: 10.h,
                 ),
-                child: TextField(
+                TextField(
                   onSubmitted: (deger) {
                     lessontime.text = deger;
                   },
                   controller: lessontime,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
+                      fillColor: HexColor("#F9F9F9"),
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: HexColor("#91919F")),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(11.0))),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(11),
+                        borderSide: BorderSide(color: HexColor("#91919F")),
+                      ),
+                      labelStyle: TextStyle(color: HexColor("#91919F")),
                       //icon: Icon(Icons.timer), //icon of text field
                       labelText: "Ders Süresi (Dakika)" //label text of field
                       ),
                 ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              InputDecorator(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                  contentPadding: EdgeInsets.all(10),
+                SizedBox(
+                  height: 10.h,
                 ),
-                child: TextField(
+                TextField(
                   controller: lessonlink,
                   onSubmitted: (deger) {
                     lessonlink.text = deger;
                   },
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
+                      fillColor: HexColor("#F9F9F9"),
+                      filled: true,
+                      enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: HexColor("#91919F")),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(11.0))),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(11),
+                        borderSide: BorderSide(color: HexColor("#91919F")),
+                      ),
+                      labelStyle: TextStyle(color: HexColor("#91919F")),
                       //icon: Icon(Icons.timer), //icon of text field
                       labelText: "Ders Linki" //label text of field
                       ),
                 ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              InputDecorator(
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                  contentPadding: EdgeInsets.all(10),
+                SizedBox(
+                  height: 10.h,
                 ),
-                child: TextField(
+                TextField(
                   controller: studentNote,
                   onSubmitted: (deger) {
                     studentNote.text = deger;
                   },
-                  decoration: const InputDecoration(
-                      //icon: Icon(Icons.timer), //icon of text field
-                      labelText:
-                          "Öğrenciye Not Ekle (Tercihen)" //label text of field
-                      ),
-                ),
-              ),
-              SizedBox(
-                height: 10.h,
-              ),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Colors.green),
-                  onPressed: () async {
-                    if (student.text.isNotEmpty &&
-                        timeinput.text.isNotEmpty &&
-                        lessontime.text.isNotEmpty &&
-                        lessonlink.text.isNotEmpty) {
-                      //dakika();
-                      FirebaseFirestore.instance
-                          .collection('users')
-                          .where('Adı', isEqualTo: student.text)
-                          .get()
-                          .then((QuerySnapshot querySnapshot) {
-                        querySnapshot.docs.forEach((doc) {
-                          dakika(doc["Eposta"].toString());
-                        });
-                      });
-                    } else {
-                      final snackBar = SnackBar(
-                        content: const Text(
-                          'Alanlar boş kalamaz.',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: (Colors.red),
-                        action: SnackBarAction(
-                          textColor: Colors.white,
-                          label: 'Tamam',
-                          onPressed: () {},
-                        ),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                    }
+                  decoration: InputDecoration(
+                    fillColor: HexColor("#F9F9F9"),
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: HexColor("#91919F")),
+                        borderRadius: const BorderRadius.all(Radius.circular(11.0))),
 
-                    //dersekle();
-                  },
-                  child: SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.8,
-                      child: const Center(child: Text('Ders Ekle'))))
-            ],
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(11),
+                      borderSide: BorderSide(color: HexColor("#91919F")),
+                    ),
+                    labelStyle: TextStyle(color: HexColor("#91919F")),
+                    //icon: Icon(Icons.timer), //icon of text field
+                    labelText: "Öğrenciye Not Ekle (Tercihen)",
+                    //label text of field
+                  ),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(primary: Colors.green),
+                    onPressed: () async {
+                      if (student.text.isNotEmpty &&
+                          timeinput.text.isNotEmpty &&
+                          lessontime.text.isNotEmpty &&
+                          lessonlink.text.isNotEmpty) {
+                        //dakika();
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .where('Adı', isEqualTo: student.text)
+                            .get()
+                            .then((QuerySnapshot querySnapshot) {
+                          querySnapshot.docs.forEach((doc) {
+                            dakika(doc["Eposta"].toString());
+                          });
+                        });
+                      } else {
+                        final snackBar = SnackBar(
+                          content: const Text(
+                            'Alanlar boş kalamaz.',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: (Colors.red),
+                          action: SnackBarAction(
+                            textColor: Colors.white,
+                            label: 'Tamam',
+                            onPressed: () {},
+                          ),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+
+                      //dersekle();
+                    },
+                    child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: const Center(child: Text('Ders Ekle'))))
+              ],
+            ),
           ),
         ),
       ),
@@ -259,6 +285,7 @@ class _LessonAddState extends State<LessonAdd> {
 
   Future<void> dersekle(String eposta) async {
     DocumentReference docRef = lesson.doc();
+    DateTime tempDate =  DateFormat("dd.MM.yyyy").parse(widget.date.substring(0,widget.date.length-4));
     Map<String, dynamic> addLesson = {};
     addLesson['Ders'] = widget.langue;
     addLesson['Öğretmen'] = _auth.currentUser!.displayName;
@@ -267,7 +294,7 @@ class _LessonAddState extends State<LessonAdd> {
     addLesson['Dakika'] = lessontime.text;
     addLesson['Link'] = lessonlink.text;
     addLesson['Not'] = studentNote.text;
-    addLesson['Tarih'] = widget.date;
+    addLesson['Tarih'] = tempDate;
     addLesson['Id'] = docRef.id;
 
     String lessonurl = "https://dilkumbaram.com/admin/api/dersler.php?id=" +
@@ -333,19 +360,24 @@ class _LessonAddState extends State<LessonAdd> {
               DocumentSnapshot snap = snapshot.data!.docs[i];
               secili.add(snap['Adı'] != "" ? snap['Adı'] : snap['Eposta']);
             }
-            return InputDecorator(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4.0))),
-                contentPadding: EdgeInsets.all(10),
+            return SearchField(
+              searchInputDecoration: InputDecoration(
+                fillColor: HexColor("#F9F9F9"),
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: HexColor("#91919F")),
+                    borderRadius: const BorderRadius.all(Radius.circular(11.0))),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(11),
+                  borderSide: BorderSide(color: HexColor("#91919F")),
+                ),
+                labelStyle: TextStyle(color: HexColor("#91919F")),
               ),
-              child: SearchField(
-                controller: student,
-                suggestionState: SuggestionState.hidden,
-                maxSuggestionsInViewPort: 6,
-                hint: 'Öğrenci Seçiniz.',
-                suggestions: secili,
-              ),
+              controller: student,
+              suggestionState: SuggestionState.hidden,
+              maxSuggestionsInViewPort: 6,
+              hint: 'Öğrenci Seçiniz.',
+              suggestions: secili,
             );
           }
         });

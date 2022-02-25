@@ -34,7 +34,8 @@ class _PremiumPageState extends State<PremiumPage> {
     ),
   );
   final ButtonStyle resume = ElevatedButton.styleFrom(
-    textStyle: const TextStyle(fontSize: 12, color: Colors.white,fontWeight: FontWeight.bold),
+    textStyle: const TextStyle(
+        fontSize: 12, color: Colors.white, fontWeight: FontWeight.bold),
     primary: HexColor('#5FF21A'),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(32.0)),
@@ -288,7 +289,7 @@ class _PremiumPageState extends State<PremiumPage> {
                                       style: TextStyle(
                                           fontSize: 22.sp,
                                           fontWeight: FontWeight.bold,
-                                          color:Colors.white),
+                                          color: Colors.white),
                                     ),
                                     style: resume)),
                           ],
@@ -325,7 +326,9 @@ class Madde extends StatelessWidget {
                 color: Colors.white,
                 size: 24.sp,
               ),
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               Expanded(
                   child: AutoSizeText(
                 "Video ve telafuz testleri",
@@ -346,7 +349,9 @@ class Madde extends StatelessWidget {
                 color: Colors.white,
                 size: 24.sp,
               ),
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               Expanded(
                   child: AutoSizeText(
                 "Binlerce sesli kelime kartı",
@@ -367,7 +372,9 @@ class Madde extends StatelessWidget {
                 color: Colors.white,
                 size: 24.sp,
               ),
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               Expanded(
                   child: AutoSizeText(
                 "Konu anlatımı ve gramer",
@@ -388,7 +395,9 @@ class Madde extends StatelessWidget {
                 color: Colors.white,
                 size: 24.sp,
               ),
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               Expanded(
                   child: AutoSizeText(
                 "Kalıplar ve diyaloglar",
@@ -409,10 +418,12 @@ class Madde extends StatelessWidget {
                 color: Colors.white,
                 size: 24.sp,
               ),
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               Expanded(
                   child: AutoSizeText(
-                "Konu anlatımı ve gramer",
+                "İstediğin dili öğren",
                 maxLines: 1,
                 style: TextStyle(color: Colors.white, fontSize: 20.sp),
               )),
@@ -430,7 +441,9 @@ class Madde extends StatelessWidget {
                 color: Colors.white,
                 size: 24.sp,
               ),
-              SizedBox(width: 5.w,),
+              SizedBox(
+                width: 5.w,
+              ),
               Expanded(
                   child: AutoSizeText(
                 "Sınırsız erişim",

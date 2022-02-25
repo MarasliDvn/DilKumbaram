@@ -45,6 +45,13 @@
             {
               "client_id": "488623952244-e8me7vn14uum6ggb02kb33uoha6vhbn5.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "488623952244-nnkri1qqlm6arsgb76lorhgs6h9ctik4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dilKumbaram.kumbaram"
+              }
             }
           ]
         }
@@ -75,6 +82,14 @@
           }
         },
         {
+          "client_id": "488623952244-tj8tqds5bptdg7rg90oq7365sm5f2h9i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kumbaram.dil_kumbaram",
+            "certificate_hash": "806c3c576c8cd272dc461164fb7a4cd449cb5122"
+          }
+        },
+        {
           "client_id": "488623952244-e8me7vn14uum6ggb02kb33uoha6vhbn5.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -90,6 +105,13 @@
             {
               "client_id": "488623952244-e8me7vn14uum6ggb02kb33uoha6vhbn5.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "488623952244-nnkri1qqlm6arsgb76lorhgs6h9ctik4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dilKumbaram.kumbaram"
+              }
             }
           ]
         }

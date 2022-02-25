@@ -48,4 +48,5 @@ class TestlerModel {
         "yanlis2": yanlis2 == null ? null : yanlis2,
         "dil": dil == null ? null : dil,
     };
+    
 }

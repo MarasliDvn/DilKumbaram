@@ -45,7 +45,12 @@ class _LoginPageState extends State<LoginPage> {
         elevation: 0,
       ),
       body: SingleChildScrollView(
-        child: LoginPageWidgets(formKey: _formKey, loginbutton: loginbutton, googleLogin: googleLogin)),
+        reverse: true,
+
+        child: Padding(
+           padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom*0.8),
+          child: LoginPageWidgets(formKey: _formKey, loginbutton: loginbutton, googleLogin: googleLogin),
+        )),
     );
   }
 }
